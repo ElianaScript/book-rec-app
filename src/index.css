@@ -1,0 +1,37 @@
+html {
+  background-color: #5F9EA0;
+  color: #FFFAF0;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#description {
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+}
+
+#title {
+  text-align: center;
+  color: #FFFAF0;
+}
+
+#links {
+  display: flex;
+  justify-content: space-evenly;
+
+}
+
+
+.links {
+  color:pink;
+}
+
+
+@media (max-width: 792px) {
+body {
+  font-size: 14px;
+
+  }
+}
