@@ -5,7 +5,8 @@ import Post from './pages/post';
 import Quiz from './pages/quiz';
 import Profile from './pages/profile';
 import NavTabs from './components/navtabs';
-import Auth from './components/Auth';
+import Login from './pages/login';
+import Register from './pages/register';
 import './index.css';
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
                 <Route exact path="/post" element={ <Post />} />
                 <Route exact path="/quiz" element= { <Quiz />} />
                 <Route exact path="/profile" element= { <Profile />} />
-                <Route exact path="/auth" element={ <Auth />} />
+                <Route exact path="/login" element= { <Login />} />
+                <Route exact path="/register" element={<Register />} />
             </Routes>
         </div>
     );

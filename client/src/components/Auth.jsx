@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Auth = () => {
+const Auth = ({ isRegistering, setIsRegistering }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [token, setToken] = useState('');
-    const [isRegistering, setIsRegistering] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        console.log('Submitting login...')
         try {
-            const { data } = await axios.post('http://localhost:5173/api/auth/login', { email, password });
+            const { data } = await axios.post('http://localhost:5000/api/auth/login', { email, password });
             setToken(data.token);
             localStorage.setItem('token', data.token);
         } catch (error) {
@@ -22,7 +20,7 @@ const Auth = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.post('http://localhost:5173/api/auth/register', { email, password });
+            const { data } = await axios.post('http://localhost:5000/api/auth/register', { email, password });
             setToken(data.token);
             localStorage.setItem('token', data.token);
         } catch (error) {
