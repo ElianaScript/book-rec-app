@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function Post() {
     return (
         <div>
-            <h1>Post</h1>
+            <h1>Daily Prompts</h1>
         </div>
     )
 }

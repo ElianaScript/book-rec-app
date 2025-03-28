@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Login= () => {
-    const [email, setEmail] = useState('');
+    const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const [token, setToken] = useState('');
@@ -9,10 +9,10 @@ const Login= () => {
     const handleLogin = async (e) => {
         e.preventDefault();
 
-        const userData = { email, password };
+        const userData = { userName, password };
 
         try {
-            const response = await fetch('/api/auth/login', {
+            const response = await fetch('https://localhost:5173/save-response', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -40,10 +40,10 @@ const Login= () => {
             <h2>Login</h2>
             <form onSubmit={handleLogin}>
                 <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="userName"
+                placeholder="User Name"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
                 required
                 />
                 <input

@@ -4,7 +4,7 @@ import '../index.css';
 function Profile () {
     return (
         <div>
-            <h1>Profile</h1>
+            <h1>Welcome, (username here)</h1>
         </div>
     )
 }
