@@ -7,7 +7,9 @@ import Profile from './pages/profile';
 import NavTabs from './components/navtabs';
 import Login from './pages/login';
 import Register from './pages/register';
+import { createPrompt, getUserPrompts } from './api/promptAPI';
 import './index.css';
+
 
 function App() {
     return (
@@ -20,6 +22,9 @@ function App() {
                 <Route exact path="/profile" element= { <Profile />} />
                 <Route exact path="/login" element= { <Login />} />
                 <Route exact path="/register" element={<Register />} />
+                <Route exact path="/profile/:userId" element={<Profile />} />
+                <Route exact path="/promptAPI" element={<createPrompt />} />
+                <Route exact path="/promptAPI" element={<getUserPrompts />} />
             </Routes>
         </div>
     );

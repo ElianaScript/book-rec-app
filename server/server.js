@@ -49,6 +49,8 @@ app.post('/api/auth/login', async (req, res) => {
     }
 });
 
+app.use('/api/prompts', require('./routes/promptRoutes'));
+
 mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log('MongoDB connected'))
 .catch((err) => console.log('MongoDB connection error:', err));
