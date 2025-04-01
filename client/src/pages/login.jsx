@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState} from 'react';
 
 const Login= () => {
     const [userName, setUserName] = useState('');
@@ -12,7 +12,7 @@ const Login= () => {
         const userData = { userName, password };
 
         try {
-            const response = await fetch('https://localhost:5173/save-response', {
+            const response = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

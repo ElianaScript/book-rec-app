@@ -1,23 +1,48 @@
 import React from 'react';
-import '../index.css'
+import {Box, Button, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 
 function Home() {
     return (
-        <div className="home">
-            <h2>Do you have a novel idea?</h2>
-            <p>Write short stories daily, and take quizzes to see which book you're going to binge next. Register or log into an existing account below!!!</p>
+        <Box
+            p={8}
+            bg="pink.200"
+            minHeight="100vh"
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+        >
+            <Text fontSize="2xl" color="pink.800" mb={4}>
+                Do you have novel idea?
+            </Text>
+            <Text fontSize="2xl" color="pink.600" mb={6}>
+                Write short stories daily, and take quizzes to see which book series to read next. Register or log into an existing account below!
+            </Text>
 
-            <Link to='/login'>
-                <button className="btn">Login</button>
-            </Link>
+        <Link to='/login'>
+            <Button
+                colorScheme="pink"
+                size="lg"
+                mb={4}
+                _hover={{ bg: 'pink.600', color: 'white' }}
+            >
+                Login
+            </Button>
+        </Link>
 
-            <Link to='/register'>
-                <button className="btn">Register</button>
-            </Link>
-        </div>  
-    );
+        <Link to='/register'>
+        <Button
+        colorScheme="pink"
+        size="lg"
+        _hover={{ bg: 'pink.600', color: 'white' }}
+        >
+            Register
+        </Button>
+    </Link>
+</Box>
+);
 }
 
 export default Home;

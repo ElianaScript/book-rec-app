@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Home from './pages/home';
 import Post from './pages/post';
 import Quiz from './pages/quiz';
@@ -8,12 +8,11 @@ import NavTabs from './components/navtabs';
 import Login from './pages/login';
 import Register from './pages/register';
 import { createPrompt, getUserPrompts } from './api/promptAPI';
-import './index.css';
 
 
 function App() {
     return (
-        <div>
+        <BrowserRouter>
             <NavTabs />
             <Routes>
                 <Route exact path="/" element={ <Home /> } />
@@ -26,7 +25,7 @@ function App() {
                 <Route exact path="/promptAPI" element={<createPrompt />} />
                 <Route exact path="/promptAPI" element={<getUserPrompts />} />
             </Routes>
-        </div>
+        </BrowserRouter>
     );
 };
 
