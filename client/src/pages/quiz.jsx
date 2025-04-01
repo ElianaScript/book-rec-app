@@ -55,18 +55,22 @@ const bookRecommendations = {
     Romance: {
         Modern: ["Pride and Prejudice by Jane Austen", "Beach Read by Emily Henry"],
         Classic: ["Love on The Brain by Ali Hazelwood", "Fangirl Down by Tessa Bailey"],
+        None: ["The Paper Swan by Leylah Attar", "The Night Mark by Tiffany Reisz"],
     },
     Fantasy: {
         Modern: ["Throne of Glass series by Sarah J. Maas", "Psy-Changeling series by Nalini Singh"],
         Classic: ["Neuromancer by William Gibson", "The Three Body Problem by Liu Cixin"],
+        None: ["The Long Price Quartet by Daniel Abraham", "The Mirror Empire"],
     },
     Horror: {
         Modern: ["Carrie by Stephen King", "The Mist in The Mirror by Susan Hill"],
         Classic: ["House of Leaves by Mark Z. Danielwski", "The Little Stranger by Sarah Waters"],
+        None: ["The Fisherman by John Langan", "The Ballad of Black Tom by Victor LaValle"],
     },
     Mystery: {
         Modern: ["And Then There Were None by Agatha Christie", "The Likeness by Tana French"],
-        Classic: ["The Girl on the Train by Paula Hawkins", "The Silent Patient by Alex Michaelides"]
+        Classic: ["The Girl on the Train by Paula Hawkins", "The Silent Patient by Alex Michaelides"],
+        None: ["The Devotion of Suspect X by Keigo Higashino", "In the Woods by Tana French"],
     },
 };
 
