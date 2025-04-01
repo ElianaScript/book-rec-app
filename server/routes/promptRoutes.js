@@ -1,52 +1,60 @@
 import express from 'express';
-const router = express.Router();
-const Prompt = require('../models/Prompt');
-const { verifyToken } = require('../middleware/auth')
+import Prompt from '../models/Prompt.js';
+import { verifyToken } from '../middleware/authMiddleware.js';
 
-router.get('/', verifyToken, async (req, res) => {
+const router = express.Router();
+
+router.post("/", verifyToken, async (req, res) => {
+    console.log(req.body);
     try {
         const { title, description } = req.body;
-        const newPrompt = new Prompt({
-            title,
-            description,
-            author: req.user.id
-        });
+        const author = req.user.id;
+
+        const newPrompt = new Prompt({ title, description, author });
         await newPrompt.save();
-        res.status(200).json(newPrompt);
+
+        res.status(201).json(newPrompt);
     } catch (error) {
-        res.status(500).json({ error: 'Error creating prompt'});
+        console.error(error);
+        res.status(500).json({ error: 'Error creating prompt' });
     }
 });
 
-router.get('/:userId', async (req, res) => {
+router.get("/", async (req, res) => {
     try {
-        const prompts = await Prompt.find({ author: req.params.userId }).populate('author', 'username' );
-        res.json(prompts);
+        const prompts = await Prompt.find().populate("author", "username").sort({ createdAt: -1 });
+        res.status(200).json(prompts);
     } catch (error) {
         res.status(500).json({ error: 'Error fetching prompts' });
     }
 });
 
-router.post('/prompts', async (req,res) => {
-    const {title, description } = req.body;
-
-    if( !title || !description) {
-        return res.status(400).json({ error: "Title and description are required" });
-    }
-
+router.post("/:id/response", verifyToken, async (req, res) => {
     try {
-        const newPrompt = new Prompt({
-            title, 
-            description,
-            author: req.user._id,
-        });
+        const { text } = req.body;
+        const promptId = req.params.id;
+        const author = req.user.id;
 
-        const savedPrompt = await newPrompt.save();
-        res.json(savedPrompt);
+        const newResponse = new Response({ text, author, prompt: promptId });
+        await newResponse.save();
+
+        await Prompt.findByIdAndUpdate(promptId, { $push: { responses: newResponse._id } });
+
+        res.status(201).json(newResponse);
     } catch (error) {
-        console.error('Error saving prompt', error);
-        resizeTo.status(500).json({ error: 'Server error' });
+        res.status(500).json({ error: "Error submitting response" });
     }
 });
 
-module.exports = router;
+router.post('/:id/like', verifyToken, async (req, res) => {
+    try {
+        const promptId = req.params.id;
+        const updatedPrompt = await Prompt.findByIdAndUpdate(promptId, {$inc: { likes: 1 } }, { new: true });
+
+        res.status(200).json(updatedPrompt);
+    } catch (error) {
+        res.status(500).json({ error: "Error liking prompt" });
+    }
+});
+
+export default router;

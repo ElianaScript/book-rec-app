@@ -3,14 +3,16 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import User from './models/User.js'
-import authRoutes from './routes/authRoutes.js';
-import { errorHandler } from './middlewares/errorHandler.js';
+import { User } from './models/User.js'
+import promptRoutes from './routes/promptRoutes.js';
+
+const PORT = process.env.PORT || 3001;
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use('/api/prompts', promptRoutes);
 
 app.post('/api/auth/register', async (req, res) => {
     const { email, password } = req.body;
@@ -49,12 +51,10 @@ app.post('/api/auth/login', async (req, res) => {
     }
 });
 
-app.use('/api/prompts', require('./routes/promptRoutes'));
-
 mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log('MongoDB connected'))
 .catch((err) => console.log('MongoDB connection error:', err));
 
-app.listen(process.env.PORT || 5000, () => {
-    console.log(`Server running on port ${process.env.PORT || 5000}`);
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });

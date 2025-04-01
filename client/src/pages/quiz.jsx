@@ -1,4 +1,3 @@
-import '../index.css';
 import React, { useState } from 'react';
 
 const Quiz = () => {
@@ -7,7 +6,7 @@ const Quiz = () => {
     const [recommendedBooks, setRecommendedBooks] = useState([]);
 
 
-const genres = ['Romance', 'SciFi / Fantasy', 'Horror', 'Mystery'];
+const genres = ['Romance', 'Fantasy', 'Horror', 'Mystery'];
 
 const authorQuestions= {
 Romance: { 

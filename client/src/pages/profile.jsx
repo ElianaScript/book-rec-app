@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getUserPrompts } from '../api/promptAPI';
 import  { useParams } from 'react-router-dom';
-import '../index.css';
+
 
 const Profile = () => {
     const { userId } = useParams();
