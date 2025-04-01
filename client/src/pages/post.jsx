@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 
 function Post() {
     const [title, setTitle] = useState('');
@@ -25,7 +24,7 @@ function Post() {
         };
 
         try {
-            const response = await fetch('http://loacalhost:5000/apiprompts', {
+            const response = await fetch('/api/prompts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
