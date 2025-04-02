@@ -44,6 +44,17 @@ function NavTabs() {
             </Button>
         </Link>
 
+        <Link to='/book'>
+            <Button
+                colorSceheme="pink"
+                variant="link"
+                fontSize="xl"
+                _hover={{ color: 'pink.600' }}
+            >
+                Book
+            </Button>
+        </Link>
+
         <Link to='/quiz'>
             <Button
                 colorSceheme="pink"

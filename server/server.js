@@ -3,15 +3,19 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import authRoutes from "./routes/authRoutes.js";
 import { User } from './models/User.js'
 import promptRoutes from './routes/promptRoutes.js';
+import bookRoutes from './routes/bookRoutes.js';
 
 const PORT = process.env.PORT || 3001;
 
 dotenv.config();
 
 const app = express();
-app.use(express.json());
+app.use(express.json())
+app.use('/api/books', bookRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/api/prompts', promptRoutes);
 
 app.post('/api/auth/register', async (req, res) => {

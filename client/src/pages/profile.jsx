@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getUserPrompts } from '../api/promptAPI';
 import  { useParams } from 'react-router-dom';
-
+import SavedBooks from '../components/SavedBooks';
 
 const Profile = () => {
     const { userId } = useParams();
@@ -18,6 +18,7 @@ const Profile = () => {
 
 return (
   <div>
+    <SavedBooks />
     <h2>(username here) prompts</h2>
     {prompts.length > 0 ? (
       <ul>

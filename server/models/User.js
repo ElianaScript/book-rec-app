@@ -9,6 +9,13 @@ export const userSchema = new mongoose.Schema({
         match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address'],
     },
     password: { type: String, required: true },
+    books: [
+        {
+            title: { type: String, required: true },
+            author: { type: String, required: true },
+            coverImage: { type: String, required: true },
+        }
+    ],
 });
 
 userSchema.pre('save', async function (next) {
