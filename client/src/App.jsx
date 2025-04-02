@@ -7,6 +7,7 @@ import Profile from './pages/profile';
 import NavTabs from './components/navtabs';
 import Login from './pages/login';
 import Register from './pages/register';
+import Book from './pages/book';
 import { createPrompt, getUserPrompts } from './api/promptAPI';
 
 
@@ -24,6 +25,7 @@ function App() {
                 <Route exact path="/profile/:userId" element={<Profile />} />
                 <Route exact path="/promptAPI" element={<createPrompt />} />
                 <Route exact path="/promptAPI" element={<getUserPrompts />} />
+                <Route exact path="/book" element= { <Book />} />
             </Routes>
         </BrowserRouter>
     );
