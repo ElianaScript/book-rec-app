@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
+import { Box, Button, Input, Heading, Text, VStack } from '@chakra-ui/react';
 
 const Register = () => {
     const [email, setEmail] = useState('');
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
 
     const handleRegister = async (e) => {
         e.preventDefault();
+
+        if (password !== confirmPassword) {
+            setMessage('Passwords do not match');
+            return;
+        }
     
         const userData = { email, userName, password };
     
@@ -41,34 +48,92 @@ const Register = () => {
     
 
     return (
-        <div>
-            <h2>Register</h2>
-            <form onSubmit={handleRegister}>
-                <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                />
-                <input
-                type= "text"
-                placeholder="User Name"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-                required
-                />
-                <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                />
-                <button type="submit">Register</button>
+        <Box
+            p={8}
+            bg="pink.300"
+            minHeight="100vh"
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+        >
+            <Box
+                bg="white"
+                p={6}
+                borderRadius="lg"
+                boxShadow="lg"
+                width="100%"
+                maxWidth="400px"
+                textAlign="center"
+            >
+                <Heading fontSize="2xl" color="pink.700" mb={4}>
+                    Register
+                </Heading>
+
+                <form onSubmit={handleRegister}>
+                    <VStack spacing={4}>
+                        <Input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            bg="white"
+                            border="2px solid pink"
+                            focusBorderColor="pink.400"
+                            color="pink.700"
+                        />
+                        <Input
+                            type="text"
+                            placeholder="User Name"
+                            value={userName}
+                            onChange={(e) => setUserName(e.target.value)}
+                            required
+                            bg="white"
+                            border="2px solid pink"
+                            focusBorderColor="pink.400" 
+                            color="pink.700"
+                        />
+                        <Input 
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            bg="white"
+                            border="2px solid pink"
+                            focusborderColor="pink.400"
+                            color="pink.700"
+                        />
+                        <Input
+                            type="password"
+                            placeholder="Confirm Password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                            bg="white"
+                            border="2px solid pink"
+                            focusBorderColor="pink.400"
+                            color="pink.700"
+                        />
+                        <Button
+                            type="submit"
+                            colorScheme="pink"
+                            size="lg"
+                            _hover={{ bg: 'pink.600', color: 'white' }}
+                        >
+                            Register
+                        </Button>
+                    </VStack>
                 </form>
-                {message && <p>{message}</p>}
-        </div>
+
+                {message && (
+                    <Text mt={4} color={message.includes('succesful') ? 'green.500' : 'red.500'}>
+                        {message}
+                    </Text>
+                )}
+            </Box>
+        </Box>
     );
 };
 
