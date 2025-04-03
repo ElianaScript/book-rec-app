@@ -1,13 +1,24 @@
+import { Box, Button, Heading, VStack, Image, Text, Input } from '@chakra-ui/react'
+import { useState } from 'react';
 import BookSearch from "../components/BookSearch";
 
 const Book = () => {
-    const handleBookSelect = async (book) => {
+    const [selectedBook, setSelectedBook] = useState(null);
+
+    const handleBookSelect = async (book, category) => {
+        if (!book) return;
+
         const savedBook = {
             title: book.title,
-            author: book.author_name?.join(", "),
+            author: book.author_name?.join(", ") || "Unknown Author",
             openLibraryId: book.key,
-            category,
-        };
+            coverUrl: book.cover_i 
+            ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg` 
+            : "https://via.placeholder.com/150", // Fallback image
+        category, 
+    };
+
+    setSelectedBook(savedBook);
 
         const response = await fetch('/api/books/save', {
             method: "POST",
@@ -23,13 +34,46 @@ const Book = () => {
     };
 
     return (
-        <div>
-            <h1>Book Search</h1>
-            <BookSearch onBookSelect ={handleBookSelect} />
-                <button onClick={() => handleBookSelect(book, "toBeRead")}>📖 To Be Read</button>
-                <button onClick={() => handleBookSelect(book, "favorites")}>⭐ Favorite</button>
+        <Box bg="pink.300" minH="100vh" p={5} textAlign="center">
+            <Heading fontSize="2xl" color="pink.600" mb={4}>Book Search</Heading>
 
-        </div>
+            <BookSearch onBookSelect={(book) => handleBookSelect(book, "toBeRead")} />
+
+            <VStack spacing={4} mt={5}>
+                <Button
+                    colorScheme="pink"
+                    size="lg"
+                    _hover={{ bg: 'pink.600', color: 'white' }}
+                    onClick={() => handleBookSelect(selectedBook, "toBeRead")}
+                    isDisabled={!selectedBook}
+                >
+                    To Be Read
+                </Button>
+                <Button
+                    colorScheme="pink"
+                    size="lg"
+                    _hover={{ bg: 'pink.600', color: 'white' }}
+                    onClick={() => handleBookSelect(selectedBook, "favorites")}
+                    isDisabled={!selectedBook}
+                >
+                    Favorites
+                </Button>
+            </VStack>
+
+            {selectedBook && (
+                <Box mt={6} p={4} bg="white" borderRadius="md" boxShadow="md">
+                    <Image
+                        src={selectedBook.coverUrl}
+                        alt={selectedBook.title}
+                        boxSize="150px"
+                        mx="auto"
+                        mb={3}
+                    />
+                    <Text fontSize="lg" color="pink.700" fontWeight="bold">{selectedBook.title}</Text>
+                    <Text fontSize="md" color="pink.500">{selectedBook.author}</Text>
+                </Box>
+            )}
+        </Box>
     );
 };
 

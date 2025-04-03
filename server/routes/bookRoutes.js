@@ -4,7 +4,7 @@ import { verifyToken } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.post('/save', verifyToken, async (req, res) => {
+router.post('/api/books/save', verifyToken, async (req, res) => {
     const { title, author, openLibraryId, category } = req.body;
     const userId = req.user.id;
 

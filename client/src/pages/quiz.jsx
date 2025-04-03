@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Box, Button, Heading, Text, VStack } from '@chakra-ui/react';
 
 const Quiz = () => {
     const [selectedGenre, setSelectedGenre] = useState(null);
@@ -88,50 +89,64 @@ const handleAuthorSelection = async (authorType) => {
     setRecommendedBooks(books);
 
     try {
-        await fetch("https://localhost:5173/save-response", {
+        await fetch("api/save-response", {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ genre: selectedGenre, authorType, books }),
         });
+
+        if (!response.ok) throw new Error("Failed to save response");
     } catch (error) {
         console.error("Failed to save response:", error);
     }
 };
 
 return (
-    <div>
-    <h1>What we think you should be reading...</h1>
-       {!selectedGenre ? (
-        <>
+    <Box bg="pink.300" minH="100vh" p={6} textAlign="center" color="pink.700">
+        <Heading color="pink.800" mb={4}>What we think you should be reading...</Heading>
 
-    <h2>What genre do you like best?</h2>
-        {genres.map((genre) => (
-            <button key={genre} onClick={() => handleGenreSelection(genre)}>
-                {genre}
-        </button>
-     ))}
-</>
-) : !selectedAuthorType ? (
-        <>
-           <h2>{authorQuestions[selectedGenre]?.question}</h2>
-           {authorQuestions[selectedGenre]?.options.map((option) => (
-                <button key={option.text} onClick={() => handleAuthorSelection(option.type)}>
-                    {option.text}
-                </button>
-            ))}
-        </>
-    ) : (
-        <>
-        <h2>Reccommended Books:</h2>
-        <ul>
-            {recommendedBooks.map((book) => (
-                <li key={book}>{book}</li>
-            ))}
-        </ul>
-     </>
-)}
-</div>
-);
+        {!selectedGenre ? (
+            <VStack spacing={4}>
+                <Text fontSize="lg" color="pink.700">What genre do you like best?</Text>
+                {genres.map((genre) => (
+                    <Button
+                        key={genre}
+                        colorScheme="pink"
+                        variant="solid"
+                        onClick={() => handleGenreSelection(genre)}
+                        color="pink.800"
+                    >
+                        {genre}
+                    </Button>
+                ))}
+            </VStack>
+        ) : !selectedAuthorType ? (
+            <VStack spacing={4}>
+                <Heading fontSize="lg" color="pink.700">{authorQuestions[selectedGenre]?.question}</Heading>
+                {authorQuestions[selectedGenre]?.options.map((option) => (
+                    <Button
+                        key={option.text}
+                        colorScheme="pink"
+                        variant="outline"
+                        onClick={() =>  handleAuthorSelection(option.type)}
+                    >
+                        {option.text}
+                    </Button>
+                ))}   
+            </VStack>
+        ) : (
+            <VStack spacing={4}>
+                <Heading fontSize="lg" color="pink.700">Recommended Books:</Heading>
+                <Box bg="white" p={4} borderRadius="lg" boxShadow="md">
+                    <ul>
+                        {recommendedBooks.map((book) => (
+                             <Text key={book} color="gray.700">{book}</Text>
+                            ))}
+                        </ul>
+                    </Box>
+                </VStack>
+            )}
+        </Box>
+    );
 };
-
 export default Quiz;

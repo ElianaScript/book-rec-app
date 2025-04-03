@@ -5,7 +5,7 @@ import { Box, Text, Stack, Button } from '@chakra-ui/react';
 function NavTabs() {
     return (
         <Box
-            bg="pink.200"
+            bg="pink.300"
             p={4}
             display="flex"
             justifyContent="center"
@@ -24,10 +24,12 @@ function NavTabs() {
             <Stack direction="row" spacing={6}>
                 <Link to='/'>
                 <Button
+                    fontFamily=" 'Bebas Neue' , serif" 
                     colorScheme="pink"
                     variant="link"
                     fontSize="xl"
-                    _hover={{ color: 'pink.600' }}
+                    color="pink.800"
+                    _hover={{ color: 'pink.100' }}
                 >
                     Home
                 </Button>
@@ -35,10 +37,12 @@ function NavTabs() {
 
             <Link to='/post'>
             <Button
+                fontFamily=" 'Bebas Neue' , serif" 
                 colorSceheme="pink"
                 variant="link"
                 fontSize="xl"
-                _hover={{ color: 'pink.600' }}
+                color="pink.800"
+                _hover={{ color: 'pink.100' }}
             >
                 Post
             </Button>
@@ -46,10 +50,12 @@ function NavTabs() {
 
         <Link to='/book'>
             <Button
+                fontFamily=" 'Bebas Neue' , serif" 
                 colorSceheme="pink"
                 variant="link"
                 fontSize="xl"
-                _hover={{ color: 'pink.600' }}
+                color="pink.800"
+                _hover={{ color: 'pink.100' }}
             >
                 Book
             </Button>
@@ -57,10 +63,12 @@ function NavTabs() {
 
         <Link to='/quiz'>
             <Button
+                fontFamily=" 'Bebas Neue' , serif" 
                 colorSceheme="pink"
                 variant="link"
                 fontSize="xl"
-                _hover={{ color: 'pink.600' }}
+                color='pink.800'
+                _hover={{ color: 'pink.100' }}
             >
                 Quiz
             </Button>
@@ -68,10 +76,12 @@ function NavTabs() {
 
         <Link to='/profile'>
             <Button
+                fontFamily=" 'Bebas Neue' , serif" 
                 colorSceheme="pink"
                 variant="link"
                 fontSize="xl"
-                _hover={{ color: 'pink.600' }}
+                color="pink.800"
+                _hover={{ color: 'pink.100' }}
             >
                 Profile
             </Button>

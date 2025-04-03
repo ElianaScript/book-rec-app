@@ -7,17 +7,17 @@ function Home() {
     return (
         <Box
             p={8}
-            bg="pink.200"
+            bg="pink.300"
             minHeight="100vh"
             display="flex"
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
         >
-            <Text fontSize="2xl" color="pink.800" mb={4}>
+            <Text fontFamily=" 'Bebas Neue' , serif" fontSize="2xl" color="pink.800" mb={4}>
                 Do you have novel idea?
             </Text>
-            <Text fontSize="2xl" color="pink.600" mb={6}>
+            <Text fontFamily=" 'Bebas Neue' , serif" fontSize="2xl" color="pink.600" mb={6}>
                 Write short stories daily, and take quizzes to see which book series to read next. Register or log into an existing account below!
             </Text>
 

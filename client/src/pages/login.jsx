@@ -1,4 +1,6 @@
 import React, { useState} from 'react';
+import {Box, Button, Input, Heading, Text, VStack } from '@chakra-ui/react';
+import { set } from 'mongoose';
 
 const Login= () => {
     const [userName, setUserName] = useState('');
@@ -36,29 +38,76 @@ const Login= () => {
     };
 
     return (
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-                <input
-                type="userName"
-                placeholder="User Name"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-                required
-                />
-                <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                />
-                <button type="submit">Login</button>
+        <Box
+            p={8}
+            bg="pink.300"
+            minHeight="100vh"
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+        >
+            <Box
+                bg="white"
+                p={6}
+                borderRadius="lg"
+                width="100%"
+                maxWidth="400px"
+                textAlign="center"
+            >
+                <Heading fontSize="2xl" color="pink.700" mb={4}>
+                    Login
+                </Heading>
+
+                <form onSubmit={handleLogin}>
+                    <VStack spacing={4}>
+                        <Input
+                            type="text"
+                            placeholder="User Name"
+                            value={userName}
+                            onChange={(e) => setUserName(e.target.value)}
+                            requiredbg="white"
+                            border="2px solid pink"
+                            focusBorderColor="pink.400"
+                            color="pink.700"
+                        />
+                        <Input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            bg="white"
+                            border="2px solid pink"
+                            focusBorderColor="pink.400"
+                            color="pink.700"
+                        />
+                        <Button
+                            type="submit"
+                            colorScheme="pink"
+                            size="lg"
+                            _hover={{ bg: 'pink.600', color:'white' }}
+                        >
+                            Login
+                        </Button>
+                    </VStack>
             </form>
-            {message && <p>{message}</p>}
-            {token && <p>Logged in with token: {token}</p>}
-        </div>
-    );
+
+            {message && (
+                <Text mt={4} color={message.includes('successful') ? 'green.500' : 'red.500'}>
+                    {message}
+                </Text>
+            )}
+            
+
+            {token && (
+                <Text mt={2} fontSize="sm" color="gray.600">
+                    Logged in with token: {token}
+                </Text>
+            )}
+        </Box>
+    </Box>
+);
 };
 
 export default Login;
