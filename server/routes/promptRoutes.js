@@ -8,7 +8,7 @@ router.post("/", verifyToken, async (req, res) => {
     console.log(req.body);
     try {
         const { title, description } = req.body;
-        const author = req.user.id;
+        const author = req.user.userId;
 
         const newPrompt = new Prompt({ title, description, author });
         await newPrompt.save();

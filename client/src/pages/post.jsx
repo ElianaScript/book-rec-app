@@ -4,9 +4,12 @@ import { Box, Button, Input, Textarea, VStack, Heading, Text, List, ListItem, Sp
 function Post() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [prompts, setPrompts] = useState('');
+    const [prompts, setPrompts] = useState([]);
     const [loading, setLoading] = useState('');
     const [fetching, setFetching] = useState(true);
+    const [error, setError] = useState('');
+    const [updatePrompt, setUpdatePrompts] = useState('');
+    const [deletePrompt, setDeletePrompt] = useState('');
 
 useEffect(() => {
     const fetchPrompts = async () => {
@@ -14,6 +17,7 @@ useEffect(() => {
             const response = await fetch('/api/prompts');
             if (!response.ok) throw new Error('Failed to fetch prompts');
             const data = await response.json();
+            console.log(data)
             setPrompts(data);
         } catch (err) {
             setError('Error fetching prompts');
@@ -36,7 +40,10 @@ const handleSubmit = async (e) => {
     try {
         const response = await fetch('/api/prompts', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
             body: JSON.stringify(newPrompt),
         });
 
@@ -55,7 +62,7 @@ const handleSubmit = async (e) => {
     };
 
     return (
-        <Box p={8} bg="pink.100" minHeight="100vh" display="flex" flexDirection="column" alignItems="center">
+        <Box p={8} bg="pink.300" minHeight="100vh" display="flex" flexDirection="column" alignItems="center">
             <Box bg="white" p={6} boxRedius="lg" boxShadow="lg" width="100%" maxWidth="500px">
                 <Heading fontSize="2xl" color="pink.700" mb={4}>
                     Write your own prompt
@@ -86,7 +93,7 @@ const handleSubmit = async (e) => {
                         />
                         <Button type="submit" colorScheme="pink" size="lg" isLoading={loading}>
                             Post Prompt
-                        </Button>            
+                        </Button>    
                    </VStack>
                 </form>
             </Box>
@@ -101,13 +108,25 @@ const handleSubmit = async (e) => {
                 ) : prompts.length === 0 ? (
                     <Text mt={2}>No prompts available yet!</Text>
                 ) : (
-                    <List mt={4} spacing={3}>
-                        {prompts.map((prompt) => (
-                            <ListItem key={prompt._id} p={4} borderWidth="1px" borderRadius="lg" bg="white">
-                                <Heading fontSize="lg" color="pink.800"></Heading>
-                            </ListItem>
-                        ))}
-                    </List>
+                    // <List mt={4} spacing={3}>
+                    //     {prompts.map((prompt) => (
+                    //         <ListItem key={prompt._id} p={4} borderWidth="1px" borderRadius="lg" bg="white">
+                    //             <Heading fontSize="lg" color="pink.800">{prompt.title}</Heading>
+                    //         </ListItem>
+                    //     ))}
+                    // </List>
+                    <>
+                    {
+                        prompts.map(prompt => {
+                            return (
+                                <Box key={prompt._id} p={4} borderWidth="1px" borderRadius="lg" bg="white" mb={4}>
+                                    <Heading fontSize="lg" color="pink.800">{prompt.title}</Heading>
+                                    <Text mt={2} color="pink.600">{prompt.description}</Text>
+                                </Box>
+                            )
+                        })
+                    }
+                    </>
                 )}
             </Box>
         </Box>

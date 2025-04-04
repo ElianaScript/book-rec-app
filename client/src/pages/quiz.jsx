@@ -27,7 +27,7 @@ options: [
     {text: "Nalini Singh", type: 'Modern'},
     {text: "Ursula Le Guin", type: 'Classic'},
     {text: "Issac Asimov", type: 'Classic'},
-    {text: "Who are these people?,", type:"None"},
+    {text: "Who are these people?", type:"None"},
 ]
 },
 Horror: { 
