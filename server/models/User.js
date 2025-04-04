@@ -8,6 +8,12 @@ export const userSchema = new mongoose.Schema({
         unique: true,
         match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address'],
     },
+    userName: {
+        type: String, 
+        required: true,
+        unique: true,
+        match: [/^[a-zA-Z0-9]+$/, 'Username can only contain letters and numbers'],
+    },
     password: { type: String, required: true },
     books: [
         {
