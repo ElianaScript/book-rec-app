@@ -15,13 +15,6 @@ export const userSchema = new mongoose.Schema({
         match: [/^[a-zA-Z0-9]+$/, 'Username can only contain letters and numbers'],
     },
     password: { type: String, required: true },
-    books: [
-        {
-            title: { type: String, required: true },
-            author: { type: String, required: true },
-            coverImage: { type: String, required: true },
-        }
-    ],
 });
 
 userSchema.pre('save', async function (next) {

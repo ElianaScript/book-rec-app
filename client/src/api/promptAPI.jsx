@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api/prompts';
+const API_URL = '/api/prompts';
 
 export const createPrompt = async ( promptData) => {
     const response = await fetch(API_URL, {

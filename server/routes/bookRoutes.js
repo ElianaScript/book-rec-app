@@ -7,12 +7,12 @@ const router = express.Router();
 router.post('/save', verifyToken, async (req, res) => {
     const { title, author, openLibraryId, category } = req.body;
     const userId = req.user.userId;
-
+    
     try {
-        const book = new Book ({ title, author, openLibraryId, userId, category });
-        await book.save();
+        const book = await Book.insertOne ({ title, author, openLibraryId, userId, category });
         res.status(201).json({ message: "Book saved successfully!" });
     } catch (error) {
+        console.error("Error saving book:", error);
         res.status(500).json({ error: "Error saving book." });
     }
 });

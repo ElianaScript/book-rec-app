@@ -1,6 +1,7 @@
 import { User } from '../models/User.js'
 import Prompt from '../models/Prompt.js';
 import jwt from 'jsonwebtoken';
+import Book from '../models/Book.js';
 
 export const registerUser = async (req, res) => {
     const { email,userName, password } = req.body;
@@ -43,10 +44,12 @@ export const getUserProfile = async (req, res) => {
 
         // get all prompts associated with the user
         const prompts = await Prompt.find({ author: req.user.userId });
+        const books = await Book.find({ userId: req.user.userId });
 
         res.status(200).json({
             ...user.toObject(),
-            prompts
+            prompts,
+            books
         });
     } catch (err) {
         res.status(500).json({ message: 'Server error' });

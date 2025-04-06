@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getUserPrompts } from '../api/promptAPI';
-import { useParams } from 'react-router-dom';
 import { Box, Heading, VStack, Text, Spinner, Button } from '@chakra-ui/react';
+import { set } from 'mongoose';
 
 const Profile = () => {
-  const { userId } = useParams();
   const [prompts, setPrompts] = useState([]);
-  const [userName, setUserName] = useState("");
+  const [userData, setUserData] = useState("");
   const [loading, setLoading] = useState(true);
   const [books, setBooks] = useState([]);
 
@@ -22,21 +21,12 @@ const Profile = () => {
 
         if (!response.ok) throw new Error('Failed to fetch profile');
         const userData = await response.json();
-        setUserName(userData.userName);
+        setLoading(false);
+        setUserData(userData);
+        setPrompts(userData.prompts);
+        setBooks(userData.books);
       } catch (error) {
         console.error("Error fetching user profile:", error);
-      }
-    };
-
-    const fetchPrompts = async () => {
-      try {
-        const userPrompts = await getUserPrompts(userId);
-        setPrompts(userPrompts);
-      } catch (error) {
-        console.error("Error fetching user prompts:", error);
-        setPrompts([]);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -59,13 +49,12 @@ const Profile = () => {
     };
 
     fetchProfile();
-    fetchPrompts();
     fetchBooks();
-  }, [userId]);
+  }, []);
 
   const handleUpdate = async (promptId) => {
     const updatedTitle = prompt("Enter new title:");
-    updatedDescription = prompt("Enter new description:");
+    const updatedDescription = prompt("Enter new description:");
 
     if (!updatedTitle || !updatedDescription) return;
 
@@ -107,13 +96,13 @@ const Profile = () => {
     }
   };
 
-  const favoriteBooks = books.filter((b) => b.category === "favorite");
-  const toBeReadBooks = books.filter((b) => b.category === "toBeRead");
+  const favoriteBooks = books.filter((b) => b.category === "favorites");
+  const toBeReadBooks = books.filter((b) => b.category === "toRead");
 
   return (
     <Box bg="pink.100" minH="100vh" p={6}>
       <Heading color="pink.800" size="xl" mb={6}>
-        {userName ? `Hello, ${userName}!` : "Loading..."}
+        {userData.userName ? `Hello, ${userData.userName}!` : "Loading..."}
       </Heading>
 
       <Box mb={6}>

@@ -10,8 +10,7 @@ router.post("/", verifyToken, async (req, res) => {
         const { title, description } = req.body;
         const author = req.user.userId;
 
-        const newPrompt = new Prompt({ title, description, author });
-        await newPrompt.save();
+        const newPrompt = await Prompt.insertOne({ title, description, author });
 
         res.status(201).json(newPrompt);
     } catch (error) {
@@ -28,6 +27,18 @@ router.get("/", async (req, res) => {
         res.status(500).json({ error: 'Error fetching prompts' });
     }
 });
+
+router.get('/:id', async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const prompts = await Prompt.find({ author: userId }).populate("responses").sort({ createdAt: -1 });
+        res.status(200).json(prompts);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error fetching user prompts' });
+    }
+}
+)
 
 router.post("/:id/response", verifyToken, async (req, res) => {
     try {
@@ -54,6 +65,29 @@ router.post('/:id/like', verifyToken, async (req, res) => {
         res.status(200).json(updatedPrompt);
     } catch (error) {
         res.status(500).json({ error: "Error liking prompt" });
+    }
+});
+
+router.delete('/:id', verifyToken, async (req, res) => {
+    try {
+        const promptId = req.params.id;
+        await Prompt.findByIdAndDelete(promptId);
+        res.status(200).json({ message: "Prompt deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ error: "Error deleting prompt" });
+    }
+});
+
+router.put('/:id', verifyToken, async (req, res) => {
+    try {
+        const promptId = req.params.id;
+        const { title, description } = req.body;
+
+        const updatedPrompt = await Prompt.findByIdAndUpdate(promptId, { title, description }, { new: true });
+
+        res.status(200).json(updatedPrompt);
+    } catch (error) {
+        res.status(500).json({ error: "Error updating prompt" });
     }
 });
 
