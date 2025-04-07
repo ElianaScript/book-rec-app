@@ -102,11 +102,11 @@ const Profile = () => {
   return (
     <Box bg="pink.100" minH="100vh" p={6}>
       <Heading color="pink.800" size="xl" mb={6}>
-        {userData.userName ? `Hello, ${userData.userName}!` : "Loading..."}
+        {userData.userName ? `Hello, ${userData.userName}!.𖥔 ݁ ˖   ✦    ‧₊˚ ⋅.𖥔 ݁ ˖   ✦    ‧₊˚ ⋅` : "Loading..."}
       </Heading>
 
       <Box mb={6}>
-        <Heading size="md" color="pink.600">💖 Favorite Books</Heading>
+        <Heading size="md" color="pink.600">⋆Favorite Books⋆</Heading>
         {favoriteBooks.length > 0 ? (
           <ul>
             {favoriteBooks.map((book) => (
@@ -119,7 +119,7 @@ const Profile = () => {
       </Box>
 
       <Box mb={6}>
-        <Heading size="md" color="pink.600">📚 To Be Read</Heading>
+        <Heading size="md" color="pink.600">⋆To Be Read⋆</Heading>
         {toBeReadBooks.length > 0 ? (
           <ul>
             {toBeReadBooks.map((book) => (
@@ -133,7 +133,7 @@ const Profile = () => {
 
      <Box borderBottom="1px solid #ccc" my={4} />
 
-      <Heading color="pink.700" mb={4}>📝 Your Prompt Responses</Heading>
+      <Heading color="pink.700" mb={4}>⋆Your Prompts⋆</Heading>
       {loading ? (
         <Spinner size="xl" color="pink.500" />
       ) : prompts.length > 0 ? (

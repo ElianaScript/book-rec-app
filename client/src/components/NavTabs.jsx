@@ -18,7 +18,7 @@ function NavTabs() {
                 color="pink.800"
                 mb={4}
             >
-                novel idea
+                ୨⎯ novel idea ⎯୧
             </Text>
 
             <Stack direction="row" spacing={6}>
