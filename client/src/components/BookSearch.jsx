@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Box, Input, Button, VStack, Text, List, ListItem, IconButton } from "@chakra-ui/react";
 
 const BookSearch = ({ onBookSelect }) => {
   const [query, setQuery] = useState("");
@@ -15,7 +16,6 @@ const BookSearch = ({ onBookSelect }) => {
 
   return (
     <div>
-      <h2>Search for Books</h2>
       <input
         type="text"
         value={query}

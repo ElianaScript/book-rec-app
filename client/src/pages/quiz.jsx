@@ -127,7 +127,7 @@ return (
                     <Button
                         key={option.text}
                         colorScheme="pink"
-                        variant="outline"
+                        variant="solid"
                         onClick={() =>  handleAuthorSelection(option.type)}
                     >
                         {option.text}

@@ -39,7 +39,7 @@ const Profile = () => {
           },
         });
 
-        if(!response.ok) throw new Error('Failed to fetch saved books');
+        if (!response.ok) throw new Error('Failed to fetch saved books');
         const data = await response.json();
         setBooks(data);
       } catch (err) {
@@ -51,6 +51,27 @@ const Profile = () => {
     fetchProfile();
     fetchBooks();
   }, []);
+
+  const handleDeleteBook = async (bookId) => {
+    if (!window.confirm("Are you sure you want to delete this book?")) return;
+
+    try {
+      const response = await fetch(`/api/books/${bookId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      if (!response.ok) throw new Error("Failed to delete book");
+
+
+      setBooks(books.filter((book) => book._id !== bookId));
+    } catch (error) {
+      console.error("Error deleting book:", error);
+    }
+  };
+
 
   const handleUpdate = async (promptId) => {
     const updatedTitle = prompt("Enter new title:");
@@ -110,7 +131,22 @@ const Profile = () => {
         {favoriteBooks.length > 0 ? (
           <ul>
             {favoriteBooks.map((book) => (
-              <li key={book._id}><strong>{book.title}</strong> by {book.author}</li>
+              <li key={book._id}>
+                <Text as="span" fontWeight="bold" color="pink.700">
+                  {book.title}
+                </Text>{' '};
+                <Text as="span" color="pink.800">
+                  by {book.author}
+                </Text>
+                <Button
+                  size="xs"
+                  colorScheme="red"
+                  ml={2}
+                  onClick={() => handleDeleteBook(book._id)}
+                >
+                  Delete
+                </Button>
+              </li>
             ))}
           </ul>
         ) : (
@@ -123,7 +159,22 @@ const Profile = () => {
         {toBeReadBooks.length > 0 ? (
           <ul>
             {toBeReadBooks.map((book) => (
-              <li key={book._id}><strong>{book.title}</strong> by {book.author}</li>
+              <li key={book._id}>
+                <Text as="span" fontWeight="bold" color="pink.700">
+                  {book.title}
+                </Text>{' '};
+                <Text as="span" color="pink.800">
+                  by {book.author}
+                </Text>
+                <Button
+                  size="xs"
+                  colorScheme="red"
+                  ml={2}
+                  onClick={() => handleDeleteBook(book._id)}
+                >
+                  Delete
+                </Button>
+              </li>
             ))}
           </ul>
         ) : (
@@ -131,7 +182,7 @@ const Profile = () => {
         )}
       </Box>
 
-     <Box borderBottom="1px solid #ccc" my={4} />
+      <Box borderBottom="1px solid #ccc" my={4} />
 
       <Heading color="pink.700" mb={4}>⋆Your Prompts⋆</Heading>
       {loading ? (
