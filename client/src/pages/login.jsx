@@ -1,6 +1,5 @@
 import React, { useState} from 'react';
 import {Box, Button, Input, Heading, Text, VStack } from '@chakra-ui/react';
-import { set } from 'mongoose';
 
 const Login= () => {
     const [userName, setUserName] = useState('');
