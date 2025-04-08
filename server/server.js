@@ -15,12 +15,14 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const JWT_SECRET_KEY = process.env.JWT_SECRET || '';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.use('/api/books', bookRoutes);
 app.use('/api/auth', authRoutes);
@@ -54,7 +56,7 @@ app.post('/api/auth/login', async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
-        const token = jwt.sign({ id: user._id, email: user.email }, 'WS98HG3SDFVK', { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET_KEY, { expiresIn: '1h' });
         res.status(200).json({ token });
     } catch (error) {
         console.error(error);
@@ -63,11 +65,10 @@ app.post('/api/auth/login', async (req, res) => {
 });
 
 
-app.use(express.static(path.join(__dirname, 'client', 'dist')));
 
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
 mongoose.connect(process.env.MONGO_URI)
