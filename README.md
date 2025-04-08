@@ -24,23 +24,22 @@ A MERN-stack book discovery platform where users can explore personalized book r
 git clone https://github.com/ElianaScript/book-rec-app.git
 cd book-rec-app
 ```
-2. **Backend setup**
+
+2.  **Install Dependencies**
 ```sh
-cd server
 npm install
-npm run start:dev
 ```
-3. **Frontend setup**
-```sh
-cd client
-npm install
-npm run start:dev
-```
-## Environment Variables
-1. **Create .env file**
+
+3. **Create environment variables**
 ```sh
 MONGO_URI=your_mongodb_uri
 JWT_SECRET=your_secret_key
+```
+
+4. **Start application**
+```sh
+npm run client:build 
+npm start
 ```
 
 ## Live Site
