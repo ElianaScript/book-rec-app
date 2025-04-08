@@ -3,17 +3,25 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 import authRoutes from "./routes/authRoutes.js";
 import { User } from './models/User.js'
 import promptRoutes from './routes/promptRoutes.js';
 import bookRoutes from './routes/bookRoutes.js';
 
-const PORT = process.env.PORT || 3001;
-
 dotenv.config();
 
 const app = express();
-app.use(express.json())
+const PORT = process.env.PORT || 3001;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
+app.use(express.json());
+
 app.use('/api/books', bookRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/prompts', promptRoutes);
@@ -26,7 +34,6 @@ app.post('/api/auth/register', async (req, res) => {
             return res.status(400).json({ message: 'User already exists' });
         }
 
-        
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({ email, password: hashedPassword });
 
@@ -47,7 +54,7 @@ app.post('/api/auth/login', async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
-        const token = jwt.sign({ id: user._id, email: user.email }, 'WS98HG3SDFVK', { expiresIn: '1hr' });
+        const token = jwt.sign({ id: user._id, email: user.email }, 'WS98HG3SDFVK', { expiresIn: '1h' });
         res.status(200).json({ token });
     } catch (error) {
         console.error(error);
@@ -55,10 +62,21 @@ app.post('/api/auth/login', async (req, res) => {
     }
 });
 
-mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log('MongoDB connected'))
-.catch((err) => console.log('MongoDB connection error:', err));
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+app.use(express.static(path.join(__dirname, 'client', 'dist')));
+
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 });
+
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        console.log('MongoDB connected');
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    })
+    .catch((err) => {
+        console.error('MongoDB connection error:', err);
+    });
