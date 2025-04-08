@@ -4,11 +4,10 @@ import Home from './pages/home';
 import Post from './pages/post';
 import Quiz from './pages/quiz';
 import Profile from './pages/profile';
-import NavTabs from './components/navtabs';
+import NavTabs from './components/NavTabs';
 import Login from './pages/login';
 import Register from './pages/register';
 import Book from './pages/book';
-import { createPrompt, getUserPrompts } from './api/promptAPI';
 
 
 function App() {
