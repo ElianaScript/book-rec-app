@@ -1,7 +1,6 @@
 import React from 'react';
-import {Box, Button, Text } from '@chakra-ui/react';
+import { Box, Button, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-
 
 function Home() {
     return (
@@ -14,35 +13,75 @@ function Home() {
             justifyContent="center"
             alignItems="center"
         >
-            <Text fontFamily=" 'Bebas Neue' , serif" fontSize="2xl" color="pink.800" mb={4}>
-                Do you have novel idea?
-            </Text>
-            <Text fontFamily=" 'Bebas Neue' , serif" fontSize="2xl" color="pink.600" mb={6}>
-                Write short stories daily, and take quizzes to see which book series to read next. Register or log into an existing account below!
-            </Text>
 
-        <Link to='/login'>
-            <Button
-                colorScheme="pink"
-                size="lg"
+            <Text
+                fontFamily="'Bebas Neue', serif"
+                fontSize="5xl"
+                fontWeight="extrabold"
+                color="pink.800"
                 mb={4}
-                _hover={{ bg: 'pink.600', color: 'white' }}
+                textAlign="center"
             >
-                Login
-            </Button>
-        </Link>
+                Got a <i>novel</i> idea?
+            </Text>
+            <Text
+                fontFamily="'Bebas Neue', serif"
+                fontSize="xl"
+                color="pink.700"
+                mb={6}
+                textAlign="center"
+            >
+                Start your daily writing ritual. Explore thoughtful prompts, <br />
+                take quizzes tailored to your reading soul, <br />
+                and find stories worth falling into. <br /><br />
+                Log in or register to begin your next chapter.
+            </Text>
 
-        <Link to='/register'>
-        <Button
-        colorScheme="pink"
-        size="lg"
-        _hover={{ bg: 'pink.600', color: 'white' }}
-        >
-            Register
-        </Button>
-    </Link>
-</Box>
-);
+
+            <Box
+                bg="pink.100"
+                p={4}
+                borderRadius="xl"
+                boxShadow="md"
+                maxW="md"
+                textAlign="center"
+                mb={6}
+            >
+                <Text fontFamily="'Bebas Neue', serif" fontSize="xl" color="pink.700" mb={2}>
+                    📚 Book of the Week
+                </Text>
+                <Text fontWeight="bold" color="pink.800">
+                    "The Night Circus" by Erin Morgenstern
+                </Text>
+                <Text fontSize="sm" color="pink.600">
+                    A whimsical, mysterious tale of magic, love, and a circus that only appears at night. We’re obsessed. ✨
+                </Text>
+            </Box>
+
+
+            <Link to='/login'>
+                <Button
+                    colorScheme="pink"
+                    size="lg"
+                    mb={4}
+                    _hover={{ bg: 'pink.600', color: 'white' }}
+                >
+                    Login
+                </Button>
+            </Link>
+
+
+            <Link to='/register'>
+                <Button
+                    colorScheme="pink"
+                    size="lg"
+                    _hover={{ bg: 'pink.600', color: 'white' }}
+                >
+                    Register
+                </Button>
+            </Link>
+        </Box>
+    );
 }
 
 export default Home;
