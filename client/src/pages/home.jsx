@@ -1,8 +1,10 @@
 import React from 'react';
-import { Box, Button, Text } from '@chakra-ui/react';
+import { Box, Button, Text, Link as ChakraLink } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 function Home() {
+    const amazonAffiliateLink = 'https://www.amazon.com/dp/0307744434?tag=chaptersele03-20'; // The Night Circus
+
     return (
         <Box
             p={8}
@@ -13,7 +15,6 @@ function Home() {
             justifyContent="center"
             alignItems="center"
         >
-
             <Text
                 fontFamily="'Bebas Neue', serif"
                 fontSize="5xl"
@@ -24,6 +25,7 @@ function Home() {
             >
                 Got a <i>novel</i> idea?
             </Text>
+
             <Text
                 fontFamily="'Bebas Neue', serif"
                 fontSize="xl"
@@ -37,7 +39,6 @@ function Home() {
                 Log in or register to begin your next chapter.
             </Text>
 
-
             <Box
                 bg="pink.100"
                 p={4}
@@ -50,14 +51,28 @@ function Home() {
                 <Text fontFamily="'Bebas Neue', serif" fontSize="xl" color="pink.700" mb={2}>
                     📚 Book of the Week
                 </Text>
-                <Text fontWeight="bold" color="pink.800">
+                <Text fontWeight="bold" color="pink.800" mb={1}>
                     "The Night Circus" by Erin Morgenstern
                 </Text>
-                <Text fontSize="sm" color="pink.600">
+                <Text fontSize="sm" color="pink.600" mb={3}>
                     A whimsical, mysterious tale of magic, love, and a circus that only appears at night. We’re obsessed. ✨
                 </Text>
-            </Box>
 
+                <ChakraLink
+                    href={amazonAffiliateLink}
+                    isExternal
+                    _hover={{ textDecoration: 'none' }}
+                >
+                    <Button
+                        colorScheme="orange"
+                        size="sm"
+                        variant="solid"
+                        _hover={{ bg: 'orange.400' }}
+                    >
+                        Buy on Amazon
+                    </Button>
+                </ChakraLink>
+            </Box>
 
             <Link to='/login'>
                 <Button
@@ -70,7 +85,6 @@ function Home() {
                 </Button>
             </Link>
 
-
             <Link to='/register'>
                 <Button
                     colorScheme="pink"
@@ -80,6 +94,17 @@ function Home() {
                     Register
                 </Button>
             </Link>
+
+            <Text
+                fontSize="xs"
+                color="pink.800"
+                mt={8}
+                textAlign="center"
+                maxW="md"
+                px={2}
+            >
+                As an Amazon Associate, we earn from qualifying purchases. Thanks for supporting your fellow book dev nerd, Eliana!
+            </Text>
         </Box>
     );
 }
