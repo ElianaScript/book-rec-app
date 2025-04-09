@@ -3,7 +3,7 @@ import { Box, Button, Text, Link as ChakraLink } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 function Home() {
-    const amazonAffiliateLink = 'https://www.amazon.com/dp/0307744434?tag=chaptersele03-20'; // The Night Circus
+    const amazonAffiliateLink = 'https://www.amazon.com/dp/0307744434?tag=chaptersele03-20'; 
 
     return (
         <Box
@@ -55,7 +55,7 @@ function Home() {
                     "The Night Circus" by Erin Morgenstern
                 </Text>
                 <Text fontSize="sm" color="pink.600" mb={3}>
-                    A whimsical, mysterious tale of magic, love, and a circus that only appears at night. We’re obsessed. ✨
+                    A whimsical, mysterious tale of magic, love, and a circus that only appears at night. I'm obssesed!
                 </Text>
 
                 <ChakraLink
@@ -64,10 +64,10 @@ function Home() {
                     _hover={{ textDecoration: 'none' }}
                 >
                     <Button
-                        colorScheme="orange"
+                        colorScheme="pink"
                         size="sm"
                         variant="solid"
-                        _hover={{ bg: 'orange.400' }}
+                        _hover={{ bg: 'pink.600' }}
                     >
                         Buy on Amazon
                     </Button>
