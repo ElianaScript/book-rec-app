@@ -61,7 +61,7 @@ const bookRecommendations = {
     Fantasy: {
         Modern: ["Throne of Glass series by Sarah J. Maas", "Psy-Changeling series by Nalini Singh"],
         Classic: ["Neuromancer by William Gibson", "The Three Body Problem by Liu Cixin"],
-        None: ["The Long Price Quartet by Daniel Abraham", "The Mirror Empire"],
+        None: ["The Long Price Quartet by Daniel Abraham", "The Mirror Empire by Kameron Hurley"],
     },
     Horror: {
         Modern: ["Carrie by Stephen King", "The Mist in The Mirror by Susan Hill"],
