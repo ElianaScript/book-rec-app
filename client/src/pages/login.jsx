@@ -101,7 +101,7 @@ const Login= () => {
 
             {token && (
                 <Text mt={2} fontSize="sm" color="gray.600">
-                    Logged in with token: {token}
+                    Welcome back!
                 </Text>
             )}
         </Box>

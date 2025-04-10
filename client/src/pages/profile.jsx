@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getUserPrompts } from '../api/promptAPI';
+import LogoutButton from '../components/Logout';
 import { Box, Heading, VStack, Text, Spinner, Button } from '@chakra-ui/react';
 import { set } from 'mongoose';
 
@@ -214,6 +214,9 @@ const Profile = () => {
       ) : (
         <Text fontSize="lg" color="pink.800">No prompts yet!</Text>
       )}
+      <Box mt={4} display="flex" justifyContent="center">
+        <LogoutButton />
+      </Box>
     </Box>
   );
 };

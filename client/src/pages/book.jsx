@@ -67,6 +67,17 @@ const Book = () => {
         >
           Favorites
         </Button>
+
+        <Text
+          fontSize="xs"
+          color="pink.800"
+          mt={8}
+          textAlign="center"
+          maxW="md"
+          px={2}
+        >
+          As an Amazon Associate, we earn from qualifying purchases. Thanks for supporting your fellow book dev nerd, Eliana!
+        </Text>
       </VStack>
 
       {selectedBook && (

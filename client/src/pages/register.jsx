@@ -32,7 +32,7 @@ const Register = () => {
             const contentType = response.headers.get('Content-Type');
             if (contentType && contentType.includes('application/json')) {
                 const data = await response.json();
-                setMessage('Registration successful! Please log in.');
+                setMessage('Thanks for registering! Log in to begin your adventure!');
                 return data;
             } else {
                 const text = await response.text();
